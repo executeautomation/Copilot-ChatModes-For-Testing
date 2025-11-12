@@ -2,33 +2,60 @@
 
 This repository collects reusable "chatmodes" (conversation templates/prompts) tailored for automation testing tasks. Each chatmode is a self-contained markdown file that encodes the prompt, instructions, examples, and expected input/output style so you can quickly run or adapt automation-related conversations.
 
-One included chatmode is a Selenium → Playwright converter which helps translate Selenium test code (or test intents) into Playwright equivalents.
-
 ### Included chatmodes
 
-- `SeleniumToPlaywrightConverter/🎭 Selenium ➡ Playwright.chatmode.md` — a focused chatmode that converts Selenium-based steps, locators, and patterns into Playwright code (JavaScript/TypeScript). Use this chatmode when migrating tests or porting examples from Selenium to Playwright.
+#### Test Conversion & Migration
+- **`SeleniumToPlaywrightConverter/🎭 Selenium ➡ Playwright.chatmode.md`** — Converts Selenium Page Object Model (POM) code to Playwright in C# .NET. Maintains structure, functionality, and test logic while modernizing to Playwright's async patterns and built-in waiting mechanisms.
+
+- **`CypressToPlaywrightConverter/🎭 Cypress ➡ Playwright.chatmode.md`** — Converts Cypress test code to Playwright in JavaScript/TypeScript. Transforms Cypress test implementations into modern, robust Playwright tests while preserving business logic and improving reliability.
+
+#### BDD & Test Scenarios
+- **`PlaywrightBDDScenarios/🎭 Playwright BDD Scenarios (Reqnroll).chatmode.md`** — Creates BDD test scenarios for Playwright in C# .NET using Reqnroll (formerly SpecFlow). Helps structure feature files with Gherkin syntax, generate step definitions, and integrate with Playwright for robust test automation.
+
+#### Reporting & Analytics
+- **`PlaywrightExtentReports/🎭 Playwright Extent Reports.chatmode.md`** — Implements ExtentReports for Playwright test automation in C# .NET. Sets up comprehensive HTML reporting with screenshots, test execution logs, detailed metrics, and beautiful visualizations for test results.
 
 ### How to use a chatmode
 
-1. Open the chatmode file you want to use (for example the Selenium → Playwright file above).
-2. Provide the Selenium snippet, test steps, or a description of the test to the chat interface that's running the chatmode.
-3. The chatmode defines the expected input shape and the preferred Playwright output style (sync/async, test runner, selectors, etc.). Copy the returned Playwright code into your project and run it after adding appropriate dependencies.
+1. Open the chatmode file you want to use from the folders above.
+2. Provide your test code, requirements, or description to the chat interface that's running the chatmode.
+3. The chatmode defines the expected input shape and the preferred output style. Copy the returned code into your project and run it after adding appropriate dependencies.
 
-Example prompt you can paste into the Selenium → Playwright chatmode:
+#### Example Usage Scenarios
 
+**Selenium to Playwright (C#.NET):**
 ```
 Convert the following Selenium test to Playwright (C#.NET + Playwright Test):
 
-// Selenium WebDriver (Java)
-driver.get("https://example.com");
-driver.findElement(By.id("login")).sendKeys("user");
-driver.findElement(By.id("password")).sendKeys("pass");
-driver.findElement(By.cssSelector("button[type=submit]")).click();
-
-Verify that user lands on dashboard with text "Welcome".
+// Selenium WebDriver
+driver.Navigate().GoToUrl("https://example.com");
+driver.FindElement(By.Id("login")).SendKeys("user");
+driver.FindElement(By.Id("password")).SendKeys("pass");
+driver.FindElement(By.CssSelector("button[type=submit]")).Click();
 ```
 
-The chatmode will aim to produce a Playwright Test-style conversion, including imports, POM and assertions.
+**Cypress to Playwright (JavaScript):**
+```
+Convert this Cypress test to Playwright:
+
+cy.visit('/login');
+cy.get('#username').type('testuser');
+cy.get('#password').type('password123');
+cy.get('button[type="submit"]').click();
+cy.url().should('include', '/dashboard');
+```
+
+**BDD Scenarios (Reqnroll):**
+```
+Create BDD scenarios for a login feature with valid/invalid credentials and 
+empty field validation using Playwright and Reqnroll.
+```
+
+**Extent Reports:**
+```
+Implement Extent Reports for my Playwright C# .NET test project with 
+screenshots on failure and detailed test logging.
+```
 
 ### Naming and file conventions
 
@@ -55,6 +82,26 @@ This repository does not ship a license by default — if you'd like to apply on
 
 ---
 
-Files in this repo:
+### Quick Reference
 
-- `SeleniumToPlaywrightConverter/🎭 Selenium ➡ Playwright.chatmode.md` — Selenium to Playwright conversion chatmode (example included).
+| Chatmode | Purpose | Language/Framework | Use Case |
+|----------|---------|-------------------|----------|
+| Selenium ➡ Playwright | Test Migration | C# .NET | Converting Selenium POM tests to Playwright |
+| Cypress ➡ Playwright | Test Migration | JavaScript/TypeScript | Converting Cypress tests to Playwright |
+| BDD Scenarios (Reqnroll) | BDD Framework | C# .NET + Reqnroll | Creating Gherkin scenarios with Playwright |
+| Extent Reports | Test Reporting | C# .NET | Adding comprehensive HTML reports to tests |
+
+### Repository Structure
+
+```
+Copilot-ChatModes-For-Testing/
+├── SeleniumToPlaywrightConverter/
+│   └── 🎭 Selenium ➡ Playwright.chatmode.md
+├── CypressToPlaywrightConverter/
+│   └── 🎭 Cypress ➡ Playwright.chatmode.md
+├── PlaywrightBDDScenarios/
+│   └── 🎭 Playwright BDD Scenarios (Reqnroll).chatmode.md
+├── PlaywrightExtentReports/
+│   └── 🎭 Playwright Extent Reports.chatmode.md
+└── README.md
+```
